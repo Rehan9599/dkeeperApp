@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = (env, argv) => {
   const canisterEnvVariables = Object.entries(process.env)
@@ -46,6 +47,10 @@ module.exports = (env, argv) => {
       },
     },
     plugins: [
+      new Dotenv({
+        path: path.resolve(__dirname, '../../.env'),
+        systemvars: true,
+      }),
       new HtmlWebpackPlugin({
         template: './src/index.html',
       }),
